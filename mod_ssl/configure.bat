@@ -9,7 +9,7 @@ goto endofperl
 ##  configure.bat -- mod_ssl configuration script (Win32 version)
 ##
 ##  ====================================================================
-##  Copyright (c) 1998-2001 Ralf S. Engelschall. All rights reserved.
+##  Copyright (c) 1998-2004 Ralf S. Engelschall. All rights reserved.
 ## 
 ##  Redistribution and use in source and binary forms, with or without
 ##  modification, are permitted provided that the following conditions

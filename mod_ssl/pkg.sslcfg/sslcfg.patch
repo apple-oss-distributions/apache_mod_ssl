@@ -8,7 +8,7 @@
 ##
 ## Annotated patch file: sslcfg.patch
 ## Copyright (c) 1998-2001 Ralf S. Engelschall, All Rights Reserved. 
-## Created on: 01-Nov-2003
+## Created on: 30-Oct-2004
 ##
 ## This file assembles changes to existing Apache source files
 ## between the original Apache and the patched variant. It can be
@@ -27,8 +27,8 @@
 | which speaks SSL.
 +---------------------------------------------------------------------------
 Index: conf/httpd.conf-dist
---- conf/httpd.conf-dist	29 Oct 2003 18:57:17 -0000	1.1.1.17
-+++ conf/httpd.conf-dist	29 Oct 2003 18:59:04 -0000	1.68
+--- conf/httpd.conf-dist	22 Oct 2004 10:15:46 -0000	1.1.1.19
++++ conf/httpd.conf-dist	22 Oct 2004 10:18:59 -0000	1.70
 @@ -231,6 +231,17 @@
  #
  Port 80
@@ -298,8 +298,8 @@ Index: conf/httpd.conf-dist
 | 
 +---------------------------------------------------------------------------
 Index: conf/httpd.conf-dist-win
---- conf/httpd.conf-dist-win	29 Oct 2003 18:57:17 -0000	1.1.1.17
-+++ conf/httpd.conf-dist-win	29 Oct 2003 18:59:04 -0000	1.16
+--- conf/httpd.conf-dist-win	22 Oct 2004 10:15:46 -0000	1.1.1.19
++++ conf/httpd.conf-dist-win	22 Oct 2004 10:18:59 -0000	1.18
 @@ -190,6 +190,7 @@
  #LoadModule headers_module modules/mod_headers.so
  #LoadModule usertrack_module modules/mod_usertrack.so

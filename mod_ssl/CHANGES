@@ -23,6 +23,60 @@
       / __/ | (_) |
   __ |_____(_)___/ ___________________________________________
               
+  Changes with mod_ssl 2.8.22 (22-Oct-2004 to 30-Oct-2004)
+
+   *) Upgraded to Apache 1.3.33
+
+  Changes with mod_ssl 2.8.21 (15-Oct-2004 to 22-Oct-2004)
+
+   *) Upgraded to Apache 1.3.32
+
+  Changes with mod_ssl 2.8.20 (16-Jul-2004 to 15-Oct-2004)
+
+   *) With OpenSSL 0.9.7, prevent session resumption during a
+      renegotiation to force the client to negotiate a new (and
+      acceptable to mod_ssl) cipher suite. Additionally, ensure
+      that a correct cipher suite has been negotiated afterwards
+      (CAN-2004-0885).
+
+   *) Fixed more printf(3) style format string bugs (not security
+      related) which could crash the server if mod_ssl's trace
+      or debug log level is enabled.
+
+  Changes with mod_ssl 2.8.19 (27-May-2004 to 16-Jul-2004)
+
+   *) Fix ssl_log() related format string vulnerability in mod_proxy
+      hook functions.
+
+  Changes with mod_ssl 2.8.18 (11-May-2004 to 27-May-2004)
+
+   *) Fix buffer overflow in "SSLOptions +FakeBasicAuth" implementation
+      if the Subject-DN in the client certificate exceeds 6KB in length.
+      (CVE CAN-2004-0488).
+   
+   *) Handle the case of OpenSSL retry requests after interrupted system
+      calls during the SSL handshake phase.
+
+   *) Remove some unused functions.
+
+  Changes with mod_ssl 2.8.17 (01-Nov-2003 to 11-May-2004)
+
+   *) Upgraded to Apache 1.3.31
+
+   *) Log the OpenSSL error stack contents if the crypto engine
+      load/init fails.
+
+   *) Fixed segfault in lookup of variable SESSION_ID
+      in case SSL_get_session() returns NULL.
+
+   *) Bugfix "dbm" session cache: the DBM file was closed
+      too early (before accessing the data).
+
+   *) Bugfix "shmcb" session cache for situations where
+      the session data is bigger than the cache size.
+
+   *) Adjusted all copyright messages to contain the new year 2004 ;)
+
   Changes with mod_ssl 2.8.16 (18-Jul-2003 to 01-Nov-2003)
 
    *) Upgraded to Apache 1.3.29
