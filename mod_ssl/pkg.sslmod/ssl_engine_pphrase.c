@@ -9,7 +9,7 @@
 */
 
 /* ====================================================================
- * Copyright (c) 1998-2005 Ralf S. Engelschall. All rights reserved.
+ * Copyright (c) 1998-2006 Ralf S. Engelschall. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -389,7 +389,11 @@ void ssl_pphrase_Handle(server_rec *s, pool *p)
     return;
 }
 
+#if SSL_LIBRARY_VERSION < 0x00904000
 int ssl_pphrase_Handle_CB(char *buf, int bufsize, int verify)
+#else
+int ssl_pphrase_Handle_CB(char *buf, int bufsize, int verify, void *nadda)
+#endif
 {
     SSLModConfigRec *mc = myModConfig();
     server_rec *s;

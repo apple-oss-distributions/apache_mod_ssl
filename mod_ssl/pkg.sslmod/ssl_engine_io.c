@@ -9,7 +9,7 @@
 */
 
 /* ====================================================================
- * Copyright (c) 1998-2005 Ralf S. Engelschall. All rights reserved.
+ * Copyright (c) 1998-2006 Ralf S. Engelschall. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -264,7 +264,7 @@ static int ssl_io_suck_read(SSL *ssl, char *buf, int len)
         r = (request_rec *)ap_ctx_get(actx, "ssl::request_rec");
 
     rv = -1;
-    if (r != NULL) {
+    if (r != NULL && r->ctx != NULL) {
         ss = ap_ctx_get(r->ctx, "ssl::io::suck");
         if (ss != NULL) {
             if (ss->active && ss->pendlen > 0) {

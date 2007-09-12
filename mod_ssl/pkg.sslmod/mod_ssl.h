@@ -9,7 +9,7 @@
 */
 
 /* ====================================================================
- * Copyright (c) 1998-2005 Ralf S. Engelschall. All rights reserved.
+ * Copyright (c) 1998-2006 Ralf S. Engelschall. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -108,6 +108,10 @@
 #include <sys/time.h>
 #endif
 #ifdef WIN32
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+#include <windows.h>
 #include <wincrypt.h>
 #include <winsock2.h>
 #endif
@@ -759,7 +763,11 @@ void         ssl_scache_shmcb_status(server_rec *, pool *, void (*)(char *, void
 
 /*  Pass Phrase Support  */
 void         ssl_pphrase_Handle(server_rec *, pool *);
+#if SSL_LIBRARY_VERSION < 0x00904000
 int          ssl_pphrase_Handle_CB(char *, int, int);
+#else
+int          ssl_pphrase_Handle_CB(char *, int, int, void *);
+#endif
 
 /*  Diffie-Hellman Parameter Support  */
 DH           *ssl_dh_GetTmpParam(int);

@@ -9,7 +9,7 @@
 */
 
 /* ====================================================================
- * Copyright (c) 1998-2005 Ralf S. Engelschall. All rights reserved.
+ * Copyright (c) 1998-2006 Ralf S. Engelschall. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -103,8 +103,13 @@
 int         SSL_get_app_data2_idx(void);
 void       *SSL_get_app_data2(SSL *);
 void        SSL_set_app_data2(SSL *, void *);
-X509       *SSL_read_X509(FILE *, X509 **, int (*)());
-EVP_PKEY   *SSL_read_PrivateKey(FILE *, EVP_PKEY **, int (*)());
+#if SSL_LIBRARY_VERSION < 0x00904000
+X509       *SSL_read_X509(FILE *, X509 **, int (*)(char *, int, int));
+EVP_PKEY   *SSL_read_PrivateKey(FILE *, EVP_PKEY **, int (*)(char *, int, int));
+#else
+X509       *SSL_read_X509(FILE *, X509 **, int (*)(char *, int, int, void *));
+EVP_PKEY   *SSL_read_PrivateKey(FILE *, EVP_PKEY **, int (*)(char *, int, int, void *));
+#endif
 int         SSL_smart_shutdown(SSL *ssl);
 X509_STORE *SSL_X509_STORE_create(char *, char *);
 int         SSL_X509_STORE_lookup(X509_STORE *, int, X509_NAME *, X509_OBJECT *);
@@ -116,7 +121,11 @@ BOOL        SSL_X509_getCN(pool *, X509 *, char **);
 BOOL        SSL_load_CrtAndKeyInfo_file(pool *, STACK_OF(X509_INFO) *, char *);
 BOOL        SSL_load_CrtAndKeyInfo_path(pool *, STACK_OF(X509_INFO) *, char *);
 #endif /* SSL_EXPERIMENTAL_PROXY */
-int         SSL_CTX_use_certificate_chain(SSL_CTX *, char *, int, int (*)());
+#if SSL_LIBRARY_VERSION < 0x00904000
+int         SSL_CTX_use_certificate_chain(SSL_CTX *, char *, int, int (*)(char *, int, int));
+#else
+int         SSL_CTX_use_certificate_chain(SSL_CTX *, char *, int, int (*)(char *, int, int, void*));
+#endif
 char       *SSL_SESSION_id2sz(unsigned char *, int);
 
 #endif /* SSL_UTIL_SSL_H */

@@ -9,7 +9,7 @@
 */
 
 /* ====================================================================
- * Copyright (c) 1998-2005 Ralf S. Engelschall. All rights reserved.
+ * Copyright (c) 1998-2006 Ralf S. Engelschall. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -98,7 +98,11 @@ void SSL_set_app_data2(SSL *ssl, void *arg)
 **  _________________________________________________________________
 */
 
-X509 *SSL_read_X509(FILE *fp, X509 **x509, int (*cb)())
+#if SSL_LIBRARY_VERSION < 0x00904000
+X509 *SSL_read_X509(FILE *fp, X509 **x509, int (*cb)(char *, int, int))
+#else
+X509 *SSL_read_X509(FILE *fp, X509 **x509, int (*cb)(char *, int, int, void*))
+#endif
 {
     X509 *rc;
     BIO *bioS;
@@ -151,7 +155,11 @@ static EVP_PKEY *d2i_PrivateKey_bio(BIO *bio, EVP_PKEY **key)
 }
 #endif
 
-EVP_PKEY *SSL_read_PrivateKey(FILE *fp, EVP_PKEY **key, int (*cb)())
+#if SSL_LIBRARY_VERSION < 0x00904000
+EVP_PKEY *SSL_read_PrivateKey(FILE *fp, EVP_PKEY **key, int (*cb)(char *, int, int))
+#else
+EVP_PKEY *SSL_read_PrivateKey(FILE *fp, EVP_PKEY **key, int (*cb)(char *, int, int, void*))
+#endif
 {
     EVP_PKEY *rc;
     BIO *bioS;
@@ -463,8 +471,13 @@ BOOL SSL_load_CrtAndKeyInfo_path(pool *p, STACK_OF(X509_INFO) *sk, char *pathnam
  * format, possibly followed by a sequence of CA certificates that
  * should be sent to the peer in the SSL Certificate message.
  */
+#if SSL_LIBRARY_VERSION < 0x00904000
 int SSL_CTX_use_certificate_chain(
-    SSL_CTX *ctx, char *file, int skipfirst, int (*cb)())
+    SSL_CTX *ctx, char *file, int skipfirst, int (*cb)(char *, int, int))
+#else
+int SSL_CTX_use_certificate_chain(
+    SSL_CTX *ctx, char *file, int skipfirst, int (*cb)(char *, int, int, void *))
+#endif
 {
     BIO *bio;
     X509 *x509;
